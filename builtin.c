@@ -12,7 +12,7 @@ int _shellexit(info_t *inf)
 
 	if (inf->argv[1]) /* if there's any exit */
 	{
-		checkexit = erratoi(inf->argv[1]);
+		checkexit = _erratoi(inf->argv[1]);
 		if (checkexit == -1)
 		{
 			inf->status = 2;
@@ -44,7 +44,7 @@ int _changecd(info_t *inf)
 		_puts("TODO: >>getcwd failure message here<<\n");
 	if (!inf->argv[1])
 	{
-		dir = getenv(inf, "HOME=");
+		dir = _getenv(inf, "HOME=");
 		if (!dir)
 			chrdir_ret = /* TODO: what should this be ? */
 				chdir((dir = _getenv(inf, "PWD=")) ? dir : "/");
@@ -61,13 +61,13 @@ int _changecd(info_t *inf)
 		}
 		_puts(_getenv(inf, "OLDPWD=")), _putchar('\n');
 		chrdir_ret = /* TODO: what should this be? */
-			chdir((dir = getenv(inf, "OLDPWD=")) ? dir : "/");
+			chdir((dir = _getenv(inf, "OLDPWD=")) ? dir : "/");
 	}
 	else
 		chrdir_ret = chdir(inf->argv[1]);
 	if (chrdir_ret == -1)
 	{
-		print_error(info, "can not change directory to ");
+		print_error(inf, "can not change directory to ");
 		_eputs(inf->argv[1]), _eputchar('\n');
 	}
 	else

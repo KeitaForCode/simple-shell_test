@@ -63,9 +63,9 @@ int _atoi(char *str)
 	}
 
 	if (sign == -1)
-		output = -reuslt;
+		output = -result;
 	else
 		output = result;
 
-	return (output)
+	return (output);
 }
